@@ -47,7 +47,8 @@ function ping() {
 		clear();
 		cursor.goto(0,0);
 		cursor.grey()
-			.write(new Date().toLocaleString().slice(0,24) + '\n\n')
+			.white().write("    game ").cyan().write("{").white().write(" closure ").cyan().write("}\n")
+			.grey().write(new Date().toLocaleString().slice(0,24) + '\n\n')
 			.write("our internet is\n")
 			.hex(color).write(word(avg) + '\n')
 			.grey().write("ping: ").hex(color).write(~~ms+'').reset().write('ms')
