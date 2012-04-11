@@ -73,9 +73,9 @@ function ping() {
 			.write("         our internet is\n")
 			.hex(color).write('         ' + word(avg) + '\n')
 			.grey().write("           ping: ").hex(color).write(~~ms+'').reset().write('ms')
-			.grey().write('\n\n         the volume is\n')
+			.grey().write('\n\n          the volume is\n')
 			.hex(volColor)
-			.write('         ' + volWord(volume))
+			.write('          ' + volWord(volume))
 			.hide();
 	});
 	
