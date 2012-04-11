@@ -62,8 +62,8 @@ function ping() {
 }
 
 var rec = spawn('rec', ['-n']);
-rec.stdout.on('data', function (data) {
-	var match = /\[.*?\|((=|-)*)\]/.exec(data);
+rec.stderr.on('data', function (data) {
+	var match = /\[.*?\|((=|-)*)\s*\]/.exec(data);
 	if (match) {
 		curVol = match[1].length;
 	}
