@@ -32,17 +32,23 @@ function word(ms) {
 }
 
 function ping() {
+	
+	var avgs = [];
+	
 	exec("ping -c 1 google.com", function (err, stdout, stderr) {
 		var match = /time=(.*?)\s/.exec(stdout);
 		if (!match) { return; }
 		var ms = +match[1];
 		var color = (ms < 100) ? "#00ff00" : "#ff0000";
+		avgs.push(ms);
+		(avgs.length > 4 && avgs.shift());
+		var avg = avgs.reduce(function (sum, n) { return sum + n; }, 0) / avgs.length;
 		clear();
 		cursor.goto(0,0);
 		cursor.grey()
 			.write(new Date().toLocaleString().slice(0,24) + '\n\n')
 			.write("our internet is\n")
-			.hex(color).write(word(ms) + '\n')
+			.hex(color).write(word(avg) + '\n')
 			.grey().write("ping: ").hex(color).write(~~ms+'').reset().write('ms')
 			.hide();
 	});
