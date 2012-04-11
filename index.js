@@ -32,7 +32,9 @@ function word(ms) {
 	}
 }
 
-var curVol = 0;
+function average(avgs) {
+	return avgs.reduce(function (sum, n) { return sum + n; }, 0) / avgs.length;
+}
 
 var avgs = [];
 function ping() {
@@ -44,7 +46,7 @@ function ping() {
 		var color = (ms < 100) ? "#00ff00" : "#ff0000";
 		avgs.push(ms);
 		(avgs.length > 20 && avgs.shift());
-		var avg = avgs.reduce(function (sum, n) { return sum + n; }, 0) / avgs.length;
+		var avg = average(avgs);
 		clear();
 		cursor.goto(0,0);
 		cursor.grey()
@@ -55,17 +57,19 @@ function ping() {
 			.hex(color).write('         ' + word(avg) + '\n')
 			.grey().write("           ping: ").hex(color).write(~~ms+'').reset().write('ms')
 			.write('\n\n')
-			.write('         ' + curVol)
+			.write('         ' + average(volAvgs))
 			.hide();
 	});
 	
 }
 
+var volAvgs = [];
 var rec = spawn('rec', ['-n']);
 rec.stderr.on('data', function (data) {
 	var match = /\[.*?\|((=|-)*)\s*\]/.exec(data);
 	if (match) {
-		curVol = match[1].length;
+		volAvgs.push(match[1].length);
+		(volAvgs.length > 20 && volAvgs.shift());
 	}
 });
 
