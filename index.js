@@ -31,9 +31,10 @@ function word(ms) {
 	}
 }
 
+var avgs = [];
 function ping() {
 	
-	var avgs = [];
+
 	
 	exec("ping -c 1 google.com", function (err, stdout, stderr) {
 		var match = /time=(.*?)\s/.exec(stdout);
