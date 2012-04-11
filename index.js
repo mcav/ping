@@ -18,15 +18,15 @@ function word(ms) {
 	if (ms < 10) {
 		return "unbelievably good";
 	} else if (ms < 25) {
-		return "reasonably good";
+		return " reasonably good";
 	} else if (ms < 40) {
-		return "decent";
+		return "     decent";
 	} else if (ms < 60) {
 		return "somewhat lethargic";
 	} else if (ms < 100) {
-		return "unacceptable";
+		return "   unacceptable";
 	} else if (ms < 250) {
-		return "terrible";
+		return "    terrible";
 	} else {
 		return "fracking terrible";
 	}
@@ -34,13 +34,13 @@ function word(ms) {
 
 function volWord(db) {
 	if (db < 1) {
-		return "silent";
+		return "   silent";
 	} else if (db < 2) {
-		return "fine";
+		return "    fine";
 	} else if (db < 3) {
-		return "distracting";
+		return " distracting";
 	} else if (db < 4) {
-		return "too loud";
+		return "  too loud";
 	} else {
 		return "dubstep party";
 	}
@@ -87,7 +87,7 @@ rec.stderr.on('data', function (data) {
 	var match = /\[.*?\|((=|-)*)\s*\]/.exec(data);
 	if (match) {
 		volAvgs.push(match[1].length);
-		(volAvgs.length > 20 && volAvgs.shift());
+		(volAvgs.length > 100 && volAvgs.shift());
 	}
 });
 
