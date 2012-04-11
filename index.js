@@ -32,6 +32,20 @@ function word(ms) {
 	}
 }
 
+function volWord(db) {
+	if (db < 1) {
+		return "silent";
+	} else if (db < 2) {
+		return "fine";
+	} else if (db < 3) {
+		return "distracting";
+	} else if (db < 4) {
+		return "too loud";
+	} else {
+		return "dubstep party";
+	}
+}
+
 function average(avgs) {
 	return avgs.reduce(function (sum, n) { return sum + n; }, 0) / avgs.length;
 }
@@ -44,6 +58,9 @@ function ping() {
 		if (!match) { return; }
 		var ms = +match[1];
 		var color = (ms < 100) ? "#00ff00" : "#ff0000";
+		var volume = average(volAvgs);
+		var volColor = (volume < 2) ? "#00ff00" : "#ff0000";
+
 		avgs.push(ms);
 		(avgs.length > 20 && avgs.shift());
 		var avg = average(avgs);
@@ -56,8 +73,9 @@ function ping() {
 			.write("         our internet is\n")
 			.hex(color).write('         ' + word(avg) + '\n')
 			.grey().write("           ping: ").hex(color).write(~~ms+'').reset().write('ms')
-			.write('\n\n')
-			.write('         ' + average(volAvgs))
+			.write('\n\n         the volume is\n')
+			.hex(volColor)
+			.write('         ' + volWord(volume))
 			.hide();
 	});
 	
