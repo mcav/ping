@@ -18,15 +18,15 @@ function word(ms) {
 	if (ms < 10) {
 		return "unbelievably good";
 	} else if (ms < 25) {
-		return " reasonably good";
+		return "reasonably good";
 	} else if (ms < 40) {
-		return "     decent";
+		return "    decent";
 	} else if (ms < 60) {
 		return "somewhat lethargic";
 	} else if (ms < 100) {
-		return "   unacceptable";
+		return "  unacceptable";
 	} else if (ms < 250) {
-		return "    terrible";
+		return "   terrible";
 	} else {
 		return "fracking terrible";
 	}
