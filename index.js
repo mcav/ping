@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var exec = require('child_process').exec;
+var spawn = require('child_process').spawn;
 var ansi = require('ansi');
 var cursor = ansi(process.stdout);
 
@@ -31,10 +32,10 @@ function word(ms) {
 	}
 }
 
+var curVol = 0;
+
 var avgs = [];
 function ping() {
-	
-
 	
 	exec("ping -c 1 google.com", function (err, stdout, stderr) {
 		var match = /time=(.*?)\s/.exec(stdout);
@@ -53,9 +54,19 @@ function ping() {
 			.write("         our internet is\n")
 			.hex(color).write('         ' + word(avg) + '\n')
 			.grey().write("           ping: ").hex(color).write(~~ms+'').reset().write('ms')
+			.write('\n\n')
+			.write('         ' + curVol)
 			.hide();
 	});
 	
 }
+
+var rec = spawn('rec', ['-n']);
+rec.stdout.on('data', function (data) {
+	var match = /\[.*?\|((=|-)*)\]/.exec(data);
+	if (match) {
+		curVol = match[1].length;
+	}
+});
 
 setInterval(ping, 1000);
