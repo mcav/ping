@@ -1,0 +1,18 @@
+{
+  "author": "",
+  "name": "ping",
+  "version": "0.0.0",
+  "repository": {
+    "url": ""
+  },
+  "main": "index",
+  "engines": {
+    "node": "~0.6.14"
+  },
+  "dependencies": {
+    "ansi": "~0.1.0",
+    "canvas": "~0.11.1"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {}
+}
