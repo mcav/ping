@@ -42,7 +42,7 @@ function ping() {
 		var ms = +match[1];
 		var color = (ms < 100) ? "#00ff00" : "#ff0000";
 		avgs.push(ms);
-		(avgs.length > 10 && avgs.shift());
+		(avgs.length > 20 && avgs.shift());
 		var avg = avgs.reduce(function (sum, n) { return sum + n; }, 0) / avgs.length;
 		clear();
 		cursor.goto(0,0);
