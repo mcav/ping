@@ -68,7 +68,9 @@ function ping() {
 		cursor.goto(0,0);
 		cursor.grey()
 			.write('\n')
+			.bold()
 			.white().write("         game ").cyan().write("{").white().write(" closure ").cyan().write("}\n")
+			.resetBold()
 			.grey().write('     ' + new Date().toLocaleString().slice(0,24) + '\n\n')
 			.write("         our internet is\n")
 			.hex(color).write('         ' + word(avg) + '\n')
